@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Home
+    </title>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body background="/static/images/stock2.jpg">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/">Tempi</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stock
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/stock">Add Stock</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/viewstock">View Stock</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<marquee><h4>Temperature {{Temp}}°c | Humidity {{Hum}}% </h4></marquee>
+
+<form>
+  <div class="col-sm-4">
+      <div class="form-group">
+        <label for="block"><h3>Block</h3></label>
+            <select class="form-control" id="block">
+                <option disabled selected hidden>{{b}}</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+                <option>F</option>
+                <option>G</option>
+            </select>
+      </div>
+      <input type="hidden" id="id" name="custId" value="{{id}}">
+      <div class="form-group">
+        <label for="grain"><h3>Grain</h3></label>
+            <select class="form-control" id="grain">
+                <option disabled selected hidden>{{g}}</option>
+                <option>Rice</option>
+                <option>Wheat</option>
+                <option>Maze</option>
+            </select>
+      </div>
+      <div class="form-group">
+          <label for="type"><h3>Type</h3></label>
+          <input type="text" class="form-control" id="type" placeholder="{{t}}">
+      </div>
+      <div class="form-group">
+          <label for="weight"><h3>Kgs.</h3></label>
+          <input type="number" class="form-control" id="weight" placeholder="{{w}}">
+      </div>
+      <div class="btn-group">
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-primary btn-block">Edit Stock</button>
+        </div>
+        <div class="col-sm-12">
+          <button type="reset" class="btn btn-danger btn-block">Clear</button>
+        </div>
+      </div>
+</form>
+<br>
+<br>
+<div id="successAlert" class="alert alert-success" role="alert" style="display: none;"></div>
+<div id="errorAlert" class="alert alert-danger" role="alert" style="display: none;"></div>
+<script>
+    $(document).ready(function(){
+    $('form').on('submit',function(event) {
+        $.ajax({
+            data : {
+                id : $('#id').val(),
+                block : $('#block').val(),
+                grain : $('#grain').val(),
+                type : $('#type').val(),
+                weight : $('#weight').val()
+            },
+            type : 'POST',
+            url : '/edit'
+        })
+        .done(function(data) {
+
+            if(data.error){
+                $('#errorAlert').text(data.error).show();
+                $('#successAlert').hide();
+            }
+            else{
+                 $('#successAlert').text('Stock Added').show();
+                 $('#errorAlert').hide();
+            }
+
+        });
+        event.preventDefault();
+
+    });
+
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Home
+    </title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body background="/static/images/grain.jpg">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/">Tempi</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stock
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/stock">Add Stock</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/stock">View Stock</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/about">About<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<p class="lead" style="color: black; font-weight: normal"> Nowadays farmers are facing huge losses due to some storage requirements which are not being fulfilled and due to lack of access to affordable refrigeration systems. Hence we have come up with a project where in all the crops are being monitored in real time with the help of sensors. Basically this project uses Arduino which acts as a microcontroller as well as server and sensors like temperature, moisture, smoke and a light sensor. All these sensors can be easily controlled with the mobile through a web application developed using python.This project help us to monitor in real time and allows the user to control the changes if required.</p>
+<p class="lead" style="color: black; font-weight: normal">Most of the systems have different designs based on its functionalities. In this project the design includes a single microcontroller, temperature sensor, humidity sensor, smoke sensor, LDR, internet and a cell phone or laptop. Apart from the server entire unit is placed within warehouse or cold storage.
+
+Microcontroller located at the center of the block diagram is the control unit for each node. Program is being embedded within a microcontroller which helps to take action based on inputs provided by output of the sensors. Temperature and humidity sensors checks if there is any change in temperature and humidity within the warehouse or cold storage facility and smoke sensor is used to detect and poisonous gases. Few products need specific lighting facility in order to maintain their quality; hence LDR sensors are placed at such locations. It generates an output voltage with change in their surrounding environment. These output voltages are fed to pins of ADC unit of microcontroller. This microcontroller processes the incoming voltages from the sensor depending on the program embedded within it. Output is passed to web app where the user is able to view and control settings. A web application is being created which receives all data from hardware and is being displayed. Here we have a login system for the manager wherein he can view and monitor the environmental conditions of warehouse as shown in flow chart below.
+</p>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Home
+    </title>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/">Tempi</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stock
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/stock">Add Stock</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/viewstock">View Stock</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<form>
+<table class="table table-hover" id="table">
+  <thead class="table-success">
+    <tr>
+      <th>ID</th>
+      <th>Block</th>
+      <th>Date</th>
+      <th>Grain</th>
+      <th>Type</th>
+      <th>Kgs.</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <style>
+  th{
+    column-width: auto;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  td{
+    font-size: 20px;
+  }
+  </style>
+{% for item in data %}
+  <tr>
+    <td>{{item[0]}}</td>
+    <td id="block">{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+    <td id="grain">{{item[3]}}</td>
+    <td id="type">{{item[4]}}</td>
+    <td id="weight">{{item[5]}}</td>
+    <td><form action="{{ url_for('editprocess', id=item[0]) }}">
+      <a href="{{ url_for('editprocess', id=item[0])}}" class="btn btn-primary btn-block">Edit</a></form>
+    </td>
+    <td><form action="{{ url_for('delete', id=item[0]) }}">
+          <a href="{{ url_for('delete', id=item[0]) }}"class="btn btn-danger btn-block">Delete</a></td></form>
+  </tr>
+{% endfor %}
+</table>
+</from>
+</body>
+</html>

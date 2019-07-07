@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+     Charts
+  </title>
+  <script src="/static/js/Chart.min.js"></script>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/">Tempi</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stock
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/stock">Add Stock</a>
+          <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/stock">View Stock</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/history">History<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <div class="container">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div class="col-md-8">
+  <div class="col-md-12" style="background-color: #fff;">
+    <div style="padding:10px;">
+      <label>Choose Option</label>
+      <select id="category_faq">
+               <option value="1">Days</option>
+               <option value="2">Months</option>
+               <option value="3">Years</option>
+          </select>
+        </div>
+         <div class="views-row-1 hid"> <canvas id="chart1" height="150"></canvas></div>
+  </div>  
+</div>
+
+  <script type="text/javascript">
+
+        var months = {{months|safe}};
+        var data1 = {{data1|safe}};
+        var data2 = {{data2|safe}};
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var chart = new Chart(ctx,{
+        type:'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Temperature',
+                borderColor: "#3e95cd",
+                pointBackgroundColor: "black",
+                data: data1
+
+            },
+                {
+                    label: 'Humidity',
+                    borderColor: "#8e5ea2",
+                    pointBackgroundColor: "black",
+                    data: data2
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Temperature and Humidity of the warehouse'
+            },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+    });
+  </script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
